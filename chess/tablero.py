@@ -19,4 +19,3 @@ class Tablero:
 if __name__ == "__main__":
     tablero = Tablero()
     tablero.mostrar_tablero()
-
