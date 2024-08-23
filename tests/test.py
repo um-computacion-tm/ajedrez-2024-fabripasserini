@@ -1,32 +1,36 @@
-import sys
-import os
 import unittest
-
-# Añadir el directorio raíz del proyecto al PYTHONPATH
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-
 from chess.tablero import Tablero
 
 class TestTablero(unittest.TestCase):
+
+    def setUp(self):
     
+        self.tablero = Tablero()
+    
+      
     def test_inicializacion(self):
         tablero = Tablero()
-        self.assertIsNotNone(tablero)  # Verifica que el objeto Tablero se inicializa correctamente
+        self.assertIsNotNone(tablero)
 
+    def test_mostrar_tablero(self):
+        try:
+            self.tablero.mostrar_tablero()
+        except Exception as e:
+            self.fail(f"mostrar_tablero lanzó una excepción: {e}")
+    
+    def test_mover_pieza_fuera_del_tablero(self):
+        """Prueba que mover una pieza fuera del tablero lanza un ValueError"""
+        with self.assertRaises(ValueError):
+            self.tablero.mover_pieza(-1, 0, 3, 0)  # Coordenada de origen fuera del rango
 
+        with self.assertRaises(ValueError):
+            self.tablero.mover_pieza(1, 0, 8, 0)  # Coordenada de destino fuera del rango
 
-import unittest
-from chess.pieza import pieza  # Asegúrate de que la importación es correcta según tu estructura de carpetas
+        with self.assertRaises(ValueError):
+            self.tablero.mover_pieza(1, 8, 3, 0)  # Coordenada de origen fuera del rango
 
-class TestPieza(unittest.TestCase):
-    def setUp(self):
-        self.pieza = pieza('Reina', 'Blanco', 0, 3)
-
-    def test_atributos(self):
-        self.assertEqual(self.pieza.__nombre__, 'Reina')
-        self.assertEqual(self.pieza.__color__, 'Blanco')
-        self.assertEqual(self.pieza.__fila__, 0)
-        self.assertEqual(self.pieza.__columna__, 3)
+        with self.assertRaises(ValueError):
+            self.tablero.mover_pieza(1, 0, 3, 8)
 
 if __name__ == '__main__':
     unittest.main()

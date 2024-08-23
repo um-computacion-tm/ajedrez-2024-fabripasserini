@@ -1,27 +1,38 @@
 from tablero import Tablero
 
-
-class Chess:
+class Ajedrez:
     def __init__(self):
-        self.__board__ = Tablero()
-        self.__turn__ = "WHITE"
+        self.__tablero__ = Tablero()
+        self.__turno__ = "BLANCO"
 
-    def move(
-        self,
-        from_row,
-        from_col,
-        to_row,
-        to_col,
-    ):
-        # validate coords
-        piece = self.__board__.get_piece(from_row, from_col)
-        self.change_turn()
+    def mover(self, desde_fila, desde_columna, hasta_fila, hasta_columna):
+        if not self.__es_posicion_valida(desde_fila, desde_columna) or not self.__es_posicion_valida(hasta_fila, hasta_columna):
+            raise ValueError("Posiciones no válidas")
+
+        pieza = self.__obtener_pieza(desde_fila, desde_columna)
+        if pieza == ' ':
+            raise ValueError("No hay pieza en la posición de origen")
+        
+        self.__tablero__.__casillas__[hasta_fila][hasta_columna] = pieza
+        self.__tablero__.__casillas__[desde_fila][desde_columna] = ' '
+
+        self.cambiar_turno()
+
+    def __es_posicion_valida(self, fila, columna):
+        return 0 <= fila < 8 and 0 <= columna < 8
+
+    def __obtener_pieza(self, fila, columna):
+        return self.__tablero__.__casillas__[fila][columna]
+
     @property
-    def turn(self):
-        return self.__turn__
+    def turno(self):
+        return self.__turno__
 
-    def change_turn(self):
-        if self.__turn__ == "WHITE":
-            self.__turn__ = "BLACK"
+    def mostrar_tablero(self):
+        self.__tablero__.mostrar_tablero()
+
+    def cambiar_turno(self):
+        if self.__turno__ == "BLANCO":
+            self.__turno__ = "NEGRO"
         else:
-            self.__turn__ = "WHITE"
+            self.__turno__ = "BLANCO"
