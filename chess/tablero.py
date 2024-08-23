@@ -15,6 +15,16 @@ class Tablero:
         for i, fila in enumerate(self.__casillas__):
             print(f"{8-i}| " + " ".join(f"{casilla:2}" for casilla in fila) + " |")
         print(" +-------------------------+")
+    
+    def mover_pieza(self, desde_fila, desde_columna, hasta_fila, hasta_columna):
+        if not (0 <= desde_fila < 8 and 0 <= desde_columna < 8):
+            raise ValueError("Coordenadas de origen fuera del tablero")
+        if not (0 <= hasta_fila < 8 and 0 <= hasta_columna < 8):
+            raise ValueError("Coordenadas de destino fuera del tablero")
+
+        pieza = self.__casillas__[desde_fila][desde_columna]
+        self.__casillas__[desde_fila][desde_columna] = ' '
+        self.__casillas__[hasta_fila][hasta_columna] = pieza
 
 if __name__ == "__main__":
     tablero = Tablero()
