@@ -23,5 +23,6 @@ class TestAjedrez(unittest.TestCase):
         self.ajedrez.cambiar_turno()
         self.assertEqual(self.ajedrez.turno, "BLANCO", "Después de cambiar turno nuevamente, debería ser 'BLANCO'")
 
+
 if __name__ == '__main__':
     unittest.main()
