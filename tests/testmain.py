@@ -1,7 +1,8 @@
 import unittest
 from chess.main import Ajedrez
 from chess.tablero import Tablero
-
+ 
+ 
 class TestAjedrez(unittest.TestCase):
 
     def setUp(self):
