@@ -1,4 +1,4 @@
-from tablero import Tablero
+from chess.tablero import Tablero
 
 class Ajedrez:
     def __init__(self):
