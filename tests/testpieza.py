@@ -1,6 +1,7 @@
 import unittest
-from chess.pieza import pieza
 from chess.alfil import Alfil
+from chess.pieza import pieza
+
 
 class TestPieza(unittest.TestCase):
     def test_pieza_initialization(self):
