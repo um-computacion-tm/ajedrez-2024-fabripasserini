@@ -13,7 +13,5 @@ class TestAjedrez(unittest.TestCase):
             self.ajedrez.mover(0, 0, 8, 0)
 
 
-   
-
 if __name__ == "__main__":
     unittest.main()
