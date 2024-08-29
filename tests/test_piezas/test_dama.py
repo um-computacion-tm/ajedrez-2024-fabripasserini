@@ -1,15 +1,15 @@
 import unittest
-from chess.torre import Torre
+from chess.piezas.dama import Dama
 from chess.tablero import Tablero
 
-class TestTorre(unittest.TestCase):
+class TestDama(unittest.TestCase):
 
 
     def test_str(self):
         tablero = Tablero()
-        torre = Torre("BLANCO", tablero)
+        dama = Dama("BLANCO", tablero)
         self.assertEqual(
-            str(torre),
+            str(dama),
             "♜",
         )
 
