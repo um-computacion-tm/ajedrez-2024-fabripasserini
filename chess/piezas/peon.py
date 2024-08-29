@@ -1,12 +1,8 @@
-from chess.pieza import pieza
+from chess.piezas.pieza import pieza
 
-class Torre(pieza):
+class Peon(pieza):
     blanco_str = "♜"
     negro_str = "♖"
-    
-    
 
     def movimientos_validos(self):
         pass
-
-

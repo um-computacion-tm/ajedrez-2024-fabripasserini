@@ -1,4 +1,4 @@
-class pieza:
+class Pieza:
     def __init__(self, color, tablero):
         self.__color__ = color
         self.__tablero__ = tablero
