@@ -1,6 +1,6 @@
-from chess.pieza import pieza
+from chess.piezas.pieza import Pieza
 
-class Torre(pieza):
+class Alfil(Pieza):
     blanco_str = "♜"
     negro_str = "♖"
     
@@ -8,5 +8,3 @@ class Torre(pieza):
 
     def movimientos_validos(self):
         pass
-
-
