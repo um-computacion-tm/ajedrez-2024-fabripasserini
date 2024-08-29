@@ -1,5 +1,38 @@
 # CHANGELOG
 
+## [1.4.2] - 2024-08-26
+
+### Actualizado
+- Archivo `chess/main.py`
+- Archivo `tests/testmain.py.py`
+
+## [1.4.2] - 2024-08-25
+
+### Agregado
+- Archivo `tests/testmain.py`
+
+# [1.4.2] - 2024-08-24
+
+### Actualizado
+- Archivo `tests/testmain.py`
+
+# [1.4.2] - 2024-08-23
+
+### Actualizado
+- Archivo `tests/testtablero.py`
+- Archivo `chess/tablero.py`
+
+# [1.4.2] - 2024-08-22
+
+### Actualizado
+- Archivo `tests/`
+- Archivo `chess/`
+
+## [1.4.2] - 2024-08-21
+
+### Actualizado
+- Archivo `chess/pieza.py`
+
 ## [1.4.2] - 2024-08-20
 
 ### Actualizado
