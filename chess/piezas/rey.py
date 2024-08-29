@@ -1,6 +1,6 @@
-from chess.piezas.pieza import pieza
+from chess.piezas.pieza import Pieza
 
-class Rey(pieza):
+class Rey(Pieza):
     blanco_str = "♜"
     negro_str = "♖"
 

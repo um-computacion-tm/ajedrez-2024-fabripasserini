@@ -1,6 +1,6 @@
-from chess.piezas.pieza import pieza
+from chess.piezas.pieza import Pieza
 
-class Alfil(pieza):
+class Alfil(Pieza):
     blanco_str = "♜"
     negro_str = "♖"
     
