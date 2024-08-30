@@ -4,6 +4,9 @@ class Ajedrez:
     def __init__(self):
         self.__tablero__ = Tablero()
         self.__turno__ = "BLANCO"
+    
+    def en_juego(self):
+        return True
 
     def mover(self, desde_fila, desde_columna, hasta_fila, hasta_columna):
         if not self.__es_posicion_valida(desde_fila, desde_columna) or not self.__es_posicion_valida(hasta_fila, hasta_columna):
