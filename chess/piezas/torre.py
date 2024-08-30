@@ -9,4 +9,3 @@ class Torre(Pieza):
     def movimientos_validos(self):
         pass
 
-
