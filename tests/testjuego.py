@@ -1,31 +1,17 @@
-from chess.main import Ajedrez
+import unittest
+from chess.piezas.pieza import Pieza
+from chess.tablero import Tablero
 
+class TestPieza(unittest.TestCase):
 
-def main():
-    ajedrez = Ajedrez()
-    while ajedrez.en_juego():
-        jugar(ajedrez)
+    def setUp(self):
+        self.tablero = Tablero()  
+        self.pieza_blanca = Pieza('blanco', self.tablero)
+        self.pieza_negra = Pieza('negro', self.tablero)
 
-
-def jugar(ajedrez):
-    try:
-        print(ajedrez.mostrar_tablero())
-        print("turn: ", ajedrez.turno)
-        desde_fila = int(input("From fila: "))
-        desde_columna = int(input("From columna: "))
-        hacia_fila = int(input("hacia fila: "))
-        hacia_columna = int(input("hacia columna: "))
-        # :)
-        ajedrez.mover(
-            desde_fila,
-            desde_columna,
-            hacia_fila,
-            hacia_columna,
-        )
-    except Exception as e:
-        print("error", e)
-
-
+    def test_color_pieza(self):
+        self.assertEqual(self.pieza_blanca.__color__, 'blanco')
+        self.assertEqual(self.pieza_negra.__color__, 'negro')
 
 if __name__ == '__main__':
-    main()
+    unittest.main()
