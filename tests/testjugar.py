@@ -11,8 +11,8 @@ def jugar(ajedrez):
     try:
         print(ajedrez.mostrar_tablero())
         print("turn: ", ajedrez.turno)
-        desde_fila = int(input("From fila: "))
-        desde_columna = int(input("From columna: "))
+        desde_fila = int(input("Desde fila: "))
+        desde_columna = int(input("Desde columna: "))
         hacia_fila = int(input("hacia fila: "))
         hacia_columna = int(input("hacia columna: "))
         
