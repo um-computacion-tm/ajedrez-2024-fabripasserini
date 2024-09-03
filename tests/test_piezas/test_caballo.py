@@ -10,7 +10,7 @@ class TestCaballo(unittest.TestCase):
         caballo = Caballo("BLANCO", tablero)
         self.assertEqual(
             str(caballo),
-            "♜",
+            "♞",
         )
 
 if __name__ == '__main__':

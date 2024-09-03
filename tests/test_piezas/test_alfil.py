@@ -10,7 +10,7 @@ class TestAlfil(unittest.TestCase):
         alfil = Alfil("BLANCO", tablero)
         self.assertEqual(
             str(alfil),
-            "♜",
+            "♝",
         )
 
 if __name__ == '__main__':

@@ -10,7 +10,7 @@ class TestDama(unittest.TestCase):
         dama = Dama("BLANCO", tablero)
         self.assertEqual(
             str(dama),
-            "♜",
+            "♛",
         )
 
 if __name__ == '__main__':
