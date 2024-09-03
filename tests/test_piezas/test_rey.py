@@ -10,7 +10,7 @@ class TestRey(unittest.TestCase):
         rey = Rey("BLANCO", tablero)
         self.assertEqual(
             str(rey),
-            "♜",
+            "♚",
         )
 
 if __name__ == '__main__':

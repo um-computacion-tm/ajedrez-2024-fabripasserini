@@ -8,3 +8,6 @@ class Pieza:
             return self.blanco_str
         else:
             return self.negro_str
+    
+    def obtener_color(self):
+        return self.__color__

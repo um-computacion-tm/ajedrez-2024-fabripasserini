@@ -10,7 +10,7 @@ class TestPeon(unittest.TestCase):
         peon = Peon("BLANCO", tablero)
         self.assertEqual(
             str(peon),
-            "♜",
+            "♟",
         )
 
 if __name__ == '__main__':
