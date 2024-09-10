@@ -1,24 +1,29 @@
 import unittest
 from chess.tablero import Tablero
+from chess.piezas.torre import Torre
+from chess.piezas.rey import Rey
+from chess.piezas.caballo import Caballo
+from chess.piezas.alfil import Alfil
+from chess.piezas.dama import Dama
+from chess.piezas.peon import Peon
 
 class TestTablero(unittest.TestCase):
-
-    def setUp(self):
-    
-        self.tablero = Tablero()
-    
-      
-    def test_inicializacion(self):
+    def test_str_board(self):
         tablero = Tablero()
-        self.assertIsNotNone(tablero)
+        self.assertEqual(
+            str(tablero),
+            (
+                "♖♘♗♕♔♗♘♖\n"
+                "♙♙♙♙♙♙♙♙\n"
+                "        \n"
+                "        \n"
+                "        \n"
+                "        \n"
+                "♟♟♟♟♟♟♟♟\n"
+                "♜♞♝♛♚♝♞♜\n"
+            )
+        )
 
-    def test_mostrar_tablero(self):
-        try:
-            self.tablero.mostrar_tablero()
-        except Exception as e:
-            self.fail(f"mostrar_tablero lanzó una excepción: {e}")
-    
-   
 if __name__ == '__main__':
     unittest.main()
 
