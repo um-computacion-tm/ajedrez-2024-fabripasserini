@@ -31,7 +31,7 @@ class AjedrezMock:
         # Simulamos un movimiento inválido
         else:
             raise ValueError("Movimiento inválido")
-        
+
 class TestPlayFunction(unittest.TestCase):
 
     @patch('builtins.input', side_effect=['0', '0', '1', '0'])
@@ -53,7 +53,7 @@ class TestPlayFunction(unittest.TestCase):
         self.assertIn("tablero", output)
         self.assertIn("turno:  Blanco", output)
         self.assertIn("error Movimiento inválido", output)
-    
+ 
 
 if __name__ == '__main__':
     unittest.main()
