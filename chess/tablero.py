@@ -62,6 +62,9 @@ class Tablero:
             raise fuera_del_tablero()
         return self.__posiciones__[fila][columna]
 
+    def poner_pieza(self, fila, columna, pieza):
+        self.__posiciones__[fila][columna] = pieza
+
 if __name__ == "__main__":  
     tablero = Tablero()
   
