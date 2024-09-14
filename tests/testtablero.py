@@ -1,5 +1,6 @@
 import unittest
 from chess.tablero import Tablero
+from chess.piezas.pieza import Pieza
 from chess.piezas.torre import Torre
 from chess.piezas.rey import Rey
 from chess.piezas.caballo import Caballo
@@ -43,6 +44,25 @@ class TestTablero(unittest.TestCase):
         tablero.poner_pieza(0, 0, caballo_blanco)
         pieza = tablero.obtener_pieza(0, 0)
         self.assertEqual(str(pieza), "♘")
+
+class TestMoverPieza(unittest.TestCase):  # Asegúrate de que el nombre de la clase sea correcto
+    def setUp(self):
+        # Inicializa el tablero antes de cada test
+        self.tablero = Tablero()
+
+    def test_mover_pieza(self):
+        # Crear una pieza de prueba
+        pieza = Pieza('blanco', self.tablero)  # Pasar el tablero al inicializar la pieza
+        self.tablero.poner_pieza(0, 0, pieza)  # Colocar pieza en la posición (0, 0)
+
+        # Mover la pieza de (0, 0) a (0, 1)
+        self.tablero.mover(0, 0, 0, 1)
+
+        # Verificar que la posición de origen ahora está vacía
+        self.assertIsNone(self.tablero.obtener_pieza(0, 0))
+
+        # Verificar que la posición de destino tiene la pieza
+        self.assertEqual(self.tablero.obtener_pieza(0, 1), pieza)
 
 if __name__ == '__main__':
     unittest.main()
