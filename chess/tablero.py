@@ -65,6 +65,11 @@ class Tablero:
     def poner_pieza(self, fila, columna, pieza):
         self.__posiciones__[fila][columna] = pieza
 
+    def mover(self, desde_fila, desde_columna, hasta_fila, hasta_columna):
+        origen = self.obtener_pieza(desde_fila, desde_columna)
+        self.poner_pieza(hasta_fila, hasta_columna, origen)
+        self.poner_pieza(desde_fila, desde_columna, None)
+        
 if __name__ == "__main__":  
     tablero = Tablero()
   
