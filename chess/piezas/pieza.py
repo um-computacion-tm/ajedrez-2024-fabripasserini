@@ -15,14 +15,26 @@ class Pieza:
     
     def posibles_posiciones_vd(self, fila, columna):
         posibles = []
-        for siguente_fila in range(fila + 1, 8):
-            otra_pieza = self.__tablero__.obtener_pieza(siguente_fila, columna)
+        for siguiente_fila in range(fila + 1, 8):
+            otra_pieza = self.__tablero__.obtener_pieza(siguiente_fila, columna)
             if otra_pieza is not None:
                 if otra_pieza.__color__ != self.__color__:
-                    posibles.append((siguente_fila, columna))
+                    posibles.append((siguiente_fila, columna))
                 break
-            posibles.append((siguente_fila, columna))
+            posibles.append((siguiente_fila, columna))
         return posibles
+    
+    def posibles_posiciones_va(self, fila, columna):
+        posibles = []
+        for siguiente_fila in range(fila - 1, -1, -1):
+            posibles.append((siguiente_fila, columna))
+        return posibles
+    
+    def posible_ortogonal_posiciones(self, desde_fila, desde_columna):
+        return (
+            self.posibles_posiciones_vd(desde_fila, desde_columna) +
+            self.posibles_posiciones_va(desde_fila, desde_columna)
+        )
     
     def obtener_color(self):
         return self.__color__
