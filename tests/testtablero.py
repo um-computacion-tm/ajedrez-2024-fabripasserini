@@ -51,17 +51,13 @@ class TestMoverPieza(unittest.TestCase):  # Asegúrate de que el nombre de la cl
         self.tablero = Tablero()
 
     def test_mover_pieza(self):
-        # Crear una pieza de prueba
-        pieza = Pieza('blanco', self.tablero)  # Pasar el tablero al inicializar la pieza
-        self.tablero.poner_pieza(0, 0, pieza)  # Colocar pieza en la posición (0, 0)
+        pieza = Pieza('blanco', self.tablero)  
+        self.tablero.poner_pieza(0, 0, pieza)  
 
-        # Mover la pieza de (0, 0) a (0, 1)
         self.tablero.mover(0, 0, 0, 1)
 
-        # Verificar que la posición de origen ahora está vacía
         self.assertIsNone(self.tablero.obtener_pieza(0, 0))
-
-        # Verificar que la posición de destino tiene la pieza
+        
         self.assertEqual(self.tablero.obtener_pieza(0, 1), pieza)
 
 if __name__ == '__main__':
