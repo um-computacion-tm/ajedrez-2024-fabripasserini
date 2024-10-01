@@ -18,7 +18,7 @@ class Alfil(Pieza):
             raise fuera_del_tablero(f"La posición ({fila}, {columna}) está fuera de los límites del tablero.")
         return True
 
-    def obtener_posiciones_mover(self, desde_fila, desde_columna) # Devuelve las posiciones válidas a las que el alfil puede moverse (movimientos diagonales)
+    def obtener_posiciones_mover(self, desde_fila, desde_columna): # Devuelve las posiciones válidas a las que el alfil puede moverse 
         posiciones = []
         direcciones = [
             (-1, -1), (-1, 1), (1, -1), (1, 1) 
