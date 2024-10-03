@@ -5,6 +5,9 @@ class Alfil(Pieza):
     blanco_str = "♝"
     negro_str = "♗"
     
+    def __init__(self, color, nombre, tablero):
+        super().__init__(color, nombre, tablero)
+        
     def obtener_posibles_posiciones(self, desde_fila, desde_columna): # Devuelve todas las posiciones posibles a las que el alfil puede moverse
         posibles = []
         posibles.extend(self.obtener_posiciones_mover(desde_fila, desde_columna))

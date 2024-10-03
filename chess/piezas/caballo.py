@@ -5,6 +5,9 @@ class Caballo(Pieza):
     blanco_str = "♞"
     negro_str = "♘"
 
+    def __init__(self, color, nombre, tablero):
+        super().__init__(color, nombre, tablero)
+
     def obtener_posibles_posiciones(self, desde_fila, desde_columna):
         # Devuelve todas las posiciones posibles a las que el caballo puede moverse
         posibles = []
