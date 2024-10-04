@@ -1,9 +1,8 @@
 from chess.excepciones import *
 
 class Pieza():
-    def __init__(self, color, nombre, tablero):
+    def __init__(self, color,  tablero):
         self.__color__ = color
-        self.__nombre__ = nombre
         self.__tablero__ = tablero
     
     def __str__(self):
