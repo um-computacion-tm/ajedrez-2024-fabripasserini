@@ -5,6 +5,9 @@ class Torre(Pieza):
     blanco_str = "♜"
     negro_str = "♖"
     
+    def __init__(self, color, tablero):
+        super().__init__(color, tablero)
+
     def obtener_posibles_posiciones(self, desde_fila, desde_columna): # Devuelve todas las posiciones posibles a las que la torre puede moverse
         posibles = []
         posibles.extend(self.obtener_posiciones_verticales(desde_fila, desde_columna))
