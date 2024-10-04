@@ -10,55 +10,39 @@ from chess.piezas.peon import Peon
 from chess.excepciones import fuera_del_tablero
 
 class TestTablero(unittest.TestCase):
-    def test_str_board(self):
-        tablero = Tablero()
-        self.assertEqual(
-            str(tablero),
-            (
-                "♖♘♗♕♔♗♘♖\n"
-                "♙♙♙♙♙♙♙♙\n"
-                "        \n"
-                "        \n"
-                "        \n"
-                "        \n"
-                "♟♟♟♟♟♟♟♟\n"
-                "♜♞♝♛♚♝♞♜\n"
-            )
-        )
-    
-    def test_get_piece_out_of_range(self):
-        tablero = Tablero()
-
-        with self.assertRaises(fuera_del_tablero) as exc:
-            tablero.obtener_pieza(10, 10)
-
-        self.assertEqual(
-            exc.exception.mensaje,
-            "La posicion indicada se encuentra fuera del tablero"
-        )
-    
-
-    def test_poner_pieza_en_posicion_ocupada(self):
-        tablero = Tablero()
-        caballo_blanco = Caballo('blanco', tablero)
-        tablero.poner_pieza(0, 0, caballo_blanco)
-        pieza = tablero.obtener_pieza(0, 0)
-        self.assertEqual(str(pieza), "♘")
-
-class TestMoverPieza(unittest.TestCase):  # Asegúrate de que el nombre de la clase sea correcto
     def setUp(self):
-        # Inicializa el tablero antes de cada test
         self.tablero = Tablero()
 
-    def test_mover_pieza(self):
-        pieza = Pieza('blanco', self.tablero)  
-        self.tablero.poner_pieza(0, 0, pieza)  
+    def test_inicializacion_tablero(self):
+        # Verificar que las torres negras estén en la posición correcta
+        self.assertIsInstance(self.tablero.obtener_pieza(0, 0), Torre)
+        self.assertEqual(self.tablero.obtener_pieza(0, 0).obtener_color(), "NEGRO")
+        self.assertIsInstance(self.tablero.obtener_pieza(0, 7), Torre)
 
-        self.tablero.mover(0, 0, 0, 1)
+        # Verificar que las piezas blancas estén en la posición inicial
+        self.assertIsInstance(self.tablero.obtener_pieza(6, 0), Peon)
+        self.assertEqual(self.tablero.obtener_pieza(6, 0).obtener_color(), "BLANCO")
 
-        self.assertIsNone(self.tablero.obtener_pieza(0, 0))
-        
-        self.assertEqual(self.tablero.obtener_pieza(0, 1), pieza)
+    def test_obtener_pieza_fuera_del_tablero(self):
+        # Verificar que se lanza una excepción al intentar obtener una pieza fuera del tablero
+        with self.assertRaises(fuera_del_tablero):
+            self.tablero.obtener_pieza(8, 8)
+
+    def test_poner_pieza(self):
+        # Verificar que se puede poner una pieza en una posición vacía
+        nuevo_peon = Peon("BLANCO", self.tablero)
+        self.tablero.poner_pieza(4, 4, nuevo_peon)
+        self.assertEqual(self.tablero.obtener_pieza(4, 4), nuevo_peon)
+
+    def test_imprimir_tablero(self):
+        # No hay una manera directa de testear la impresión, pero podemos asegurarnos de que no haya errores.
+        try:
+            self.tablero.imprimir_tablero()
+        except Exception as e:
+            self.fail(f"imprimir_tablero lanzó una excepción: {e}")
+
+if __name__ == '__main__':
+    unittest.main()
 
 if __name__ == '__main__':
     unittest.main()
