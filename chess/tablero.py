@@ -60,6 +60,7 @@ class Tablero:
          self.__posiciones__[hasta_fila][hasta_columna] = None
 
     def imprimir_tablero(self):
+        print("   0|1|2|3|4|5|6|7")
         for i, fila in enumerate(self.__posiciones__):
             cadena = f"{i}- "
             for pieza in fila:
@@ -68,7 +69,8 @@ class Tablero:
                 else:
                     cadena += str(pieza) + " "
             print(cadena)
-        print("   0|1|2|3|4|5|6|7")
+
+
 if __name__ == "__main__":  
     tablero = Tablero()
 
