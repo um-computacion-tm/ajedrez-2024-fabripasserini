@@ -1,19 +1,31 @@
 class movimiento_inválido(Exception):
-    mensaje = "El movimiento no es válido"
-    def __str__(self):
-        return self
+    def __init__(self, mensaje):
+        super().__init__(mensaje)
+        self.__mensaje__ = "El movimiento no es válido"
 
-class movimiento_sin_pieza(Exception):
-    mensaje = "La posicion se encuentra vacía"
     def __str__(self):
-        return self
+        return self.__mensaje__
 
 class turno_invalido(Exception):
-    mensaje = "El turno no es válido"
+    def __init__(self, mensaje):
+        super().__init__(mensaje)
+        self.__mensaje__ = "El turno no es válido"
+
     def __str__(self):
-        return self
+        return self.__mensaje__
     
 class fuera_del_tablero(Exception):
-    mensaje = "La posicion indicada se encuentra fuera del tablero"
+    def __init__(self, mensaje):
+        super().__init__(mensaje)
+        self.__mensaje__ = "La posicion indicada se encuentra fuera del tablero"
+
     def __str__(self):
-        return self
+        return self.__mensaje__
+
+class movimiento_sin_pieza(Exception):
+    def __init__(self, mensaje):
+        super().__init__(mensaje)
+        self.__mensaje__ = "Movimiento sin pieza"
+
+    def __str__(self):
+        return self.__mensaje__
