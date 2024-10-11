@@ -1,31 +1,31 @@
 from chess.main import Ajedrez
+from chess.excepciones import  *
+import sys
+import os
+
 
 
 def main():
-    ajedrez = Ajedrez()
-    while ajedrez.en_juego():
-        play(ajedrez)
+    chess = Ajedrez()
+    menu(chess)
 
 
-def play(ajedrez):
-    try:
-        print(ajedrez.mostrar_tablero())
-        print("turno: ", ajedrez.turno)
-        desde_fila = int(input("desde fila: "))
-        desde_columna = int(input("desde columna: "))
-        hacia_fila = int(input("hacia fila: "))
-        hacia_columna = int(input("hacia columna: "))
-        
-        ajedrez.mover(
-            desde_fila,
-            desde_columna,
-            hacia_fila,
-            hacia_columna,
-        )
-    except Exception as e:
-        print("error", e)
+def menu(chess):
+    while not chess.__terminar_partida__:
+        print("BIENVENIDO"  )
+        print("1. Jugar")
+        print("2. Salir")
+        opcion = input("Ingrese una opción: ")
+        if opcion == "1":
+            print()
+            menu_juego(chess)
+        elif opcion == "2":
+            chess.terminar_partida()
+            break
+        else:
+            print("Opción no válida")
 
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
