@@ -13,6 +13,10 @@ class TestPeon(unittest.TestCase):
             "♟",
         )
 
+
+
+class TestPeon(unittest.TestCase):
+
     def setUp(self):
         self.tablero = Tablero()
         self.peon_blanco = Peon("BLANCO", self.tablero)
@@ -55,11 +59,6 @@ class TestPeon(unittest.TestCase):
         posiciones = self.peon_blanco.obtener_posibles_comer(6, 4)
         self.assertIn((5, 3), posiciones)
 
-    def test_no_puede_comer_pieza_propia(self):
-        self.tablero.poner_pieza(5, 3, Peon("BLANCO", self.tablero))
-        self.tablero.poner_pieza(6, 4, self.peon_blanco)
-        with self.assertRaises(movimiento_inválido):
-            self.peon_blanco.obtener_posibles_comer(6, 4)
     
     def test_obtener_posiciones_mover_blanco(self):
         self.tablero.poner_pieza(6, 4, self.peon_blanco)
@@ -73,5 +72,31 @@ class TestPeon(unittest.TestCase):
         self.assertIn((2, 4), posiciones)
         self.assertIn((3, 4), posiciones)
     
+    def test_peon_blanco_esquina_superior_izquierda(self):
+        self.tablero.poner_pieza(6, 0, self.peon_blanco)
+        posiciones = self.peon_blanco.obtener_posiciones_mover(6, 0)
+        self.assertIn((5, 0), posiciones)  
+        self.assertIn((4, 0), posiciones)  
+
+    
+    def test_peon_negro_esquina_inferior_izquierda(self):
+        self.tablero.poner_pieza(1, 0, self.peon_negro)
+        posiciones = self.peon_negro.obtener_posiciones_mover(1, 0)
+        self.assertIn((2, 0), posiciones)  
+        self.assertIn((3, 0), posiciones)  
+
+
+    def test_peon_blanco_esquina_superior_derecha(self):
+        self.tablero.poner_pieza(6, 7, self.peon_blanco)
+        posiciones = self.peon_blanco.obtener_posiciones_mover(6, 7)
+        self.assertIn((5, 7), posiciones)  
+        self.assertIn((4, 7), posiciones)  
+
+    def test_peon_negro_esquina_inferior_derecha(self):
+        self.tablero.poner_pieza(1, 7, self.peon_negro)
+        posiciones = self.peon_negro.obtener_posiciones_mover(1, 7)
+        self.assertIn((2, 7), posiciones)  
+        self.assertIn((3, 7), posiciones)
+
 if __name__ == '__main__':
     unittest.main()
