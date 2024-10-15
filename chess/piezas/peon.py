@@ -34,10 +34,10 @@ class Peon(Pieza):
         return True
 
     def obtener_posibles_comer(self, desde_fila, desde_columna):
-        """
-        Devuelve las posiciones diagonales donde el peón puede capturar una pieza enemiga.
-        """
+        """Devuelve las posiciones diagonales donde el peón puede capturar una pieza enemiga."""
         posiciones_comer = []
+
+        # Determinar las direcciones de captura según el color del peón
         if self.__color__ == "NEGRO":
             direcciones = [(1, 1), (1, -1)]  # Diagonales hacia adelante para peón negro
         else:
@@ -47,13 +47,13 @@ class Peon(Pieza):
             nueva_fila = desde_fila + direccion[0]
             nueva_columna = desde_columna + direccion[1]
 
-            # Verificamos que la columna esté dentro de los límites y que la posición sea válida
-            if 0 <= nueva_columna < 8 and self.es_posicion_valida(nueva_fila, nueva_columna):
+            if 0 <= nueva_fila < 8 and 0 <= nueva_columna < 8:
                 otra_pieza = self.__tablero__.obtener_pieza(nueva_fila, nueva_columna)
+
                 # Verificamos que haya una pieza enemiga en la casilla diagonal
                 if otra_pieza and otra_pieza.__color__ != self.__color__:
                     posiciones_comer.append((nueva_fila, nueva_columna))
-    
+
         return posiciones_comer
 
     def obtener_posiciones_mover(self, desde_fila, desde_columna):
@@ -86,6 +86,7 @@ class Peon(Pieza):
             if self.es_casilla_vacia(nueva_fila, desde_columna):  # Verifica si la casilla está vacía
                 posiciones.append((nueva_fila, desde_columna))  # Agregar la posición si está vacía
             else:
+                # Solo lanzar la excepción si hay una pieza en la misma columna y no se intenta capturar
                 raise movimiento_inválido(f"Hay una pieza bloqueando el movimiento en ({nueva_fila}, {desde_columna}).")
 
         return posiciones
@@ -98,6 +99,7 @@ class Peon(Pieza):
         if desde_fila == fila_inicial:
             nueva_fila_dos = desde_fila + (2 * avance)
             if self.es_posicion_valida(nueva_fila_dos, desde_columna):
+                # Verificamos que las dos casillas adelante estén vacías
                 if self.es_casilla_vacia(nueva_fila_dos, desde_columna) and self.es_casilla_vacia(desde_fila + avance, desde_columna):
                     posiciones.append((nueva_fila_dos, desde_columna))
                 else:
