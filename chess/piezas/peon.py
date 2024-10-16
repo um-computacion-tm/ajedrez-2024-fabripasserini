@@ -37,7 +37,7 @@ class Peon(Pieza):
         """Devuelve las posiciones diagonales donde el peón puede capturar una pieza enemiga."""
         posiciones_comer = []
 
-        # Determinar las direcciones de captura según el color del peón
+       
         if self.__color__ == "NEGRO":
             direcciones = [(1, 1), (1, -1)]  # Diagonales hacia adelante para peón negro
         else:
