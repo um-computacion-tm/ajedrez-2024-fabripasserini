@@ -22,24 +22,23 @@ class Rey(Pieza):
             raise fuera_del_tablero(f"La posición ({fila}, {columna}) está fuera de los límites del tablero.")
         return True
 
-    def obtener_posiciones_mover(self, desde_fila, desde_columna): # Devuelve las posiciones válidas a las que el rey puede moverse (una casilla en cualquier dirección)
+    def obtener_posiciones_mover(self, desde_fila, desde_columna):
         posiciones = []
         direcciones = [
-            (-1, 0), (1, 0), (0, -1), (0, 1), 
-            (-1, -1), (-1, 1), (1, -1), (1, 1) 
+        (-1, 0), (1, 0), (0, -1), (0, 1), 
+        (-1, -1), (-1, 1), (1, -1), (1, 1)
         ]
-        
+    
         for direccion in direcciones:
             nueva_fila = desde_fila + direccion[0]
             nueva_columna = desde_columna + direccion[1]
-            
-            if self.es_posicion_valida(nueva_fila, nueva_columna):
+        
+            # Verificamos si la posición es válida sin lanzar excepción
+            if 0 <= nueva_fila < 8 and 0 <= nueva_columna < 8:
                 otra_pieza = self.__tablero__.obtener_pieza(nueva_fila, nueva_columna)
                 if otra_pieza is None:  
                     posiciones.append((nueva_fila, nueva_columna))
                 elif otra_pieza.__color__ != self.__color__:  
                     posiciones.append((nueva_fila, nueva_columna))
-                else:
-                    raise movimiento_inválido(f"No puedes mover al rey a una casilla ocupada por tu propia pieza en ({nueva_fila}, {nueva_columna}).")
         
         return posiciones

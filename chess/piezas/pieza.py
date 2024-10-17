@@ -21,6 +21,7 @@ class Pieza():
         posibles_posiciones = self.obtener_posibles_posiciones(desde_fila, desde_columna)
         return posibles_posiciones (hasta_fila, hasta_columna) in posibles_posiciones
     
+
     
     
     

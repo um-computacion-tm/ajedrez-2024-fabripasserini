@@ -1,41 +1,75 @@
 from chess.tablero import Tablero
+from chess.excepciones import *
 
 class Ajedrez:
+    
     def __init__(self):
         self.__tablero__ = Tablero()
         self.__turno__ = "BLANCO"
-    
+        self.__terminar_partida__ = False
+        self.__ganador__ = None
+
     def en_juego(self):
         return True
-
-    def mover(self, desde_fila, desde_columna, hasta_fila, hasta_columna):
-        if not self.__es_posicion_valida(desde_fila, desde_columna) or not self.__es_posicion_valida(hasta_fila, hasta_columna):
-            raise ValueError("Posiciones no válidas")
-
-        pieza = self.__obtener_pieza(desde_fila, desde_columna)
-        if pieza == ' ':
-            raise ValueError("No hay pieza en la posición de origen")
-        
-        self.__tablero__.__casillas__[hasta_fila][hasta_columna] = pieza
-        self.__tablero__.__casillas__[desde_fila][desde_columna] = ' '
-
-        self.cambiar_turno()
-
-    def __es_posicion_valida(self, fila, columna):
+    
+    def en_tablero(self, fila, columna):
         return 0 <= fila < 8 and 0 <= columna < 8
 
-    def __obtener_pieza(self, fila, columna):
-        return self.__tablero__.__casillas__[fila][columna]
+    def mover_pieza(self, desde_fila, desde_columna, hasta_fila, hasta_columna):
+        origen = self.__tablero__.obtener_pieza(desde_fila, desde_columna)
+        destino = self.__tablero__.obtener_pieza(hasta_fila, hasta_columna)
+        if not (self.en_tablero(desde_fila, desde_columna) and self.en_tablero(hasta_fila, hasta_columna)):
+            raise fuera_del_tablero
+       
+        elif origen is None:
+            raise movimiento_sin_pieza
 
-    @property
-    def turno(self):
+        elif origen.obtener_color() != self.__turno__:
+            raise turno_invalido
+        
+        
+        elif desde_fila == hasta_fila and desde_columna == hasta_columna:
+            raise movimiento_inválido
+
+        
+        elif destino is not None and destino.obtener_color() == self.__turno__:
+            raise movimiento_inválido
+        
+        if (hasta_fila, hasta_columna) not in origen.obtener_posibles_posiciones(desde_fila, desde_columna):
+            raise movimiento_inválido
+
+        
+        self.__tablero__.poner_pieza(hasta_fila, hasta_columna, origen)
+        self.__tablero__.poner_pieza(desde_fila, desde_columna, None)
+        self.cambiar_turno()
+        
+    def turnos(self):
         return self.__turno__
 
     def mostrar_tablero(self):
-        self.__tablero__.mostrar_tablero()
+        print()
+        print("Tablero de juego")
+        self.__tablero__.imprimir_tablero()
 
     def cambiar_turno(self):
         if self.__turno__ == "BLANCO":
             self.__turno__ = "NEGRO"
         else:
             self.__turno__ = "BLANCO"
+    
+    def ganador(self):
+        if self.__terminar_partida__:
+            if self.__turno__ == "BLANCO":
+                return "NEGRO"
+            else:
+                return "BLANCO"
+        return None
+    
+    def terminar_partida(self):
+        self.__terminar_partida__ = True
+        print("Gana el jugador", self.ganador())
+        
+
+    
+
+       
