@@ -3,53 +3,77 @@ from chess.piezas.dama import Dama
 from chess.tablero import Tablero
 
 class TestDama(unittest.TestCase):
-
-
     def test_str(self):
         tablero = Tablero()
-        dama = Dama("BLANCO", tablero)
+        peon = Dama("BLANCO", tablero)
         self.assertEqual(
-            str(dama),
+            str(peon),
             "♛",
         )
 
-    
-from chess.piezas.dama import Dama
-from chess.tablero import Tablero
-from chess.excepciones import fuera_del_tablero, movimiento_inválido
-
-class TestDama(unittest.TestCase):
     def setUp(self):
+        # Inicializamos un tablero y colocamos una dama en él
         self.tablero = Tablero()
         self.dama_blanca = Dama("blanco", self.tablero)
         self.dama_negra = Dama("negro", self.tablero)
-        self.tablero.poner_pieza(self.dama_blanca, 3, 3)  # Colocar la dama blanca en (3, 3)
-        self.tablero.poner_pieza(self.dama_negra, 6, 6)  # Colocar la dama negra en (6, 6)
+    
+    def test_movimiento_libre(self):
+        
+        # Colocamos la dama blanca en el centro del tablero
+        self.tablero.poner_pieza(4, 4, self.dama_blanca)
+        
+        # Obtenemos las posibles posiciones a las que puede moverse
+        posiciones = self.dama_blanca.obtener_posiciones_mover(4, 4)
+        
+        # Movimientos válidos esperados (diagonales, verticales y horizontales)
+        esperados = [
+            (3, 3), (2, 2), (1, 1), (3, 5), (2, 6), (1, 7),  # Diagonales
+            (5, 5), (5, 3), (6, 2),           # Diagonales
+            (5, 4), (6, 4),  (3, 4), (2, 4), (1, 4),  # Verticales
+            (4, 5), (4, 6), (4, 7), (4, 3), (4, 2), (4, 1), (4, 0)   # Horizontales
+        ]
+        
+        for posicion in esperados:
+            self.assertIn(posicion, posiciones)
 
-    def test_obtener_posibles_posiciones(self):
-        # Test para las posibles posiciones de movimiento de la dama blanca
-        posiciones = self.dama_blanca.obtener_posibles_posiciones(3, 3)
-        self.assertIn((4, 4), posiciones)  # Movimiento diagonal
-        self.assertIn((3, 4), posiciones)  # Movimiento horizontal
-        self.assertIn((2, 3), posiciones)  # Movimiento vertical
+    def test_movimiento_bloqueado_por_pieza_misma(self):
+        
+        # Colocamos la dama blanca en el centro y una pieza aliada en su camino
+        self.tablero.poner_pieza(4, 4, self.dama_blanca)
+        self.tablero.poner_pieza(6, 4, self.dama_blanca)  # Bloquea movimiento vertical hacia abajo
+        
+        posiciones = self.dama_blanca.obtener_posiciones_mover(4, 4)
+        
+        # La posición (6, 4) debe estar bloqueada por la pieza aliada
+        self.assertNotIn((6, 4), posiciones)
 
-    def test_es_posicion_valida_fuera_tablero(self):
-        # Verificar si la excepción `fuera_del_tablero` es lanzada para una posición fuera del tablero
-        with self.assertRaises(fuera_del_tablero):
-            self.dama_blanca.es_posicion_valida(-1, -1)  # Posición inválida fuera del tablero
+    def test_movimiento_con_captura(self):
+        
+        # Colocamos la dama blanca en el centro y una pieza enemiga en su camino
+        self.tablero.poner_pieza(4, 4, self.dama_blanca)
+        self.tablero.poner_pieza(6, 4, self.dama_negra)  # Pieza enemiga para capturar
+        
+        posiciones = self.dama_blanca.obtener_posiciones_mover(4, 4)
+        
+        # La dama debe poder capturar en (6, 4)
+        self.assertIn((6, 4), posiciones)
 
-    def test_es_posicion_invalida_mismo_color(self):
-        # Poner otra pieza blanca en una posición (4, 4)
-        otra_dama_blanca = Dama("blanco", self.tablero)
-        self.tablero.poner_pieza(otra_dama_blanca, 4, 4)
-        with self.assertRaises(movimiento_inválido):
-            self.dama_blanca.obtener_posiciones_diagonales(3, 3)  # Movimiento bloqueado por la pieza del mismo color
 
-    def test_mover_captura(self):
-        # Test para ver si la dama negra puede capturar a la dama blanca
-        posiciones = self.dama_negra.obtener_posiciones_diagonales(6, 6)
-        self.assertIn((3, 3), posiciones)  # Captura válida de la dama blanca
+
+    def test_movimiento_bloqueado_por_piezas(self):
+       
+        # Colocamos la dama blanca y una pieza enemiga en el tablero
+        self.tablero.poner_pieza(4, 4, self.dama_blanca)
+        self.tablero.poner_pieza(6, 6, self.dama_negra)  # Pieza enemiga en la diagonal
+        
+        posiciones = self.dama_blanca.obtener_posiciones_mover(4, 4)
+        
+        # La dama debe poder moverse hasta (6, 6) y no más allá
+        self.assertIn((6, 6), posiciones)
+        self.assertNotIn((7, 7), posiciones)
 
 
 if __name__ == '__main__':
     unittest.main()
+
+
