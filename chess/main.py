@@ -1,5 +1,6 @@
 from chess.tablero import Tablero
 from chess.excepciones import *
+from chess.piezas.rey import Rey
 
 class Ajedrez:
     
@@ -8,6 +9,8 @@ class Ajedrez:
         self.__turno__ = "BLANCO"
         self.__terminar_partida__ = False
         self.__ganador__ = None
+        self.__rey_blanco__ = self.__tablero__.obtener_rey_blanco()  # Asumiendo que hay un método que obtiene los reyes
+        self.__rey_negro__ = self.__tablero__.obtener_rey_negro()
 
     def en_juego(self):
         return True
@@ -41,7 +44,14 @@ class Ajedrez:
         
         self.__tablero__.poner_pieza(hasta_fila, hasta_columna, origen)
         self.__tablero__.poner_pieza(desde_fila, desde_columna, None)
-        self.cambiar_turno()
+        
+
+        if isinstance(destino, Rey):
+            self.__terminar_partida__ = True
+            self.__ganador__ = self.__turno__
+            self.terminar_partida()
+        else:
+            self.cambiar_turno()
         
     def turnos(self):
         return self.__turno__
