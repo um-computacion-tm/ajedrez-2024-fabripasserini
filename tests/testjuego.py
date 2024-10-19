@@ -1,15 +1,19 @@
 import unittest
 from unittest.mock import patch
-from chess.juego import main
+from chess.main import Ajedrez
+from chess.juego import menu  # Asegúrate de que 'menu' esté importado correctamente
 
+class TestAjedrezMenu(unittest.TestCase):  
+    def setUp(self):
+        self.chess = Ajedrez()  # Inicializamos el objeto 'chess'
 
-class TestAjedrezMenu(unittest.TestCase):
+    @patch('builtins.input', side_effect=['2'])  # Simulamos la entrada de opción '2'
+    def test_opcion_salir(self, mock_input):
+        # Llamamos al menú
+        menu(self.chess)
+        
+        # Verificamos que la partida se haya terminado
+        self.assertTrue(self.chess.__terminar_partida__)
 
-    @patch('builtins.input', side_effect=['1', '2'])  # '1' para Jugar, '2' para Salir en el menú del juego
-    def test_menu_jugar_y_salir(self, mock_input):
-        main()
-
-
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()
-
