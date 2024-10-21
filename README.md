@@ -12,11 +12,24 @@ Juego de ajedrez en el lenguaje de programacion Python orientado a objetos - Fab
 
 ## Instalacion y uso
 ### 1. Clonar el repositorio
+```
 https://github.com/um-computacion-tm/ajedrez-2024-fabripasserini.git
+```
 ### 2. instalar dependencias
 ```
 pip install -r requirements.txt
 ```
 ### 3. Ejecutar el juego
-
+```
 python3 -m chess.juego
+```
+
+## Docker
+### 1. Construir la imagen
+```
+docker build -t ajedrez-2024-fabripasserini .
+```
+### 2. Ejecutar los tests y el juego
+```
+docker run -i ajedrez-2024-fabripasserini
+```
