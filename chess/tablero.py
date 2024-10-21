@@ -57,8 +57,9 @@ class Tablero:
             self.__posiciones__[fila][columna] = pieza
 
     def cambiar_posiciones(self, desde_fila, desde_columna, hasta_fila, hasta_columna):
-         self.__posiciones__[desde_fila][desde_columna] = self.__posiciones__[hasta_fila][hasta_columna]
-         self.__posiciones__[hasta_fila][hasta_columna] = None
+        pieza = self.__posiciones__[desde_fila][desde_columna]  # Obtener la pieza de la posición de origen
+        self.__posiciones__[hasta_fila][hasta_columna] = pieza  # Mover la pieza a la nueva posición
+        self.__posiciones__[desde_fila][desde_columna] = None 
 
     def imprimir_tablero(self):
         print("   0|1|2|3|4|5|6|7")
@@ -72,23 +73,23 @@ class Tablero:
             print(cadena)
 
     def vaciar_tablero(self):
-        self.tablero = [[None for _ in range(8)] for _ in range(8)]
+        self.__posiciones__ = [[None for _ in range(8)] for _ in range(8)]
 
     def obtener_rey_blanco(self):
         for fila in range(8):
             for columna in range(8):
-                pieza = self.__posiciones__[fila][columna]  # Cambiado a __posiciones__
+                pieza = self.__posiciones__[fila][columna]  
                 if isinstance(pieza, Rey) and pieza.obtener_color() == "BLANCO":
                     return pieza
-        return None  # Si no se encuentra el rey blanco
+        return None 
 
     def obtener_rey_negro(self):
         for fila in range(8):
             for columna in range(8):
-                pieza = self.__posiciones__[fila][columna]  # Cambiado a __posiciones__
+                pieza = self.__posiciones__[fila][columna]  
                 if isinstance(pieza, Rey) and pieza.obtener_color() == "NEGRO":
                     return pieza
-        return None  # Si no se encuentra el rey negro
+        return None  
 
 if __name__ == "__main__":  
     tablero = Tablero()
