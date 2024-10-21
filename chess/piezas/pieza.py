@@ -17,8 +17,11 @@ class Pieza():
     
     def posiciones_validas (self, desde_fila, desde_columna, hasta_fila, hasta_columna):
         posibles_posiciones = self.obtener_posibles_posiciones(desde_fila, desde_columna)
-        return posibles_posiciones (hasta_fila, hasta_columna) in posibles_posiciones
+        return (hasta_fila, hasta_columna) in posibles_posiciones
     
+    def obtener_posibles_posiciones(self, desde_fila, desde_columna):
+        # Este método debe ser implementado en las subclases.
+        raise NotImplementedError("Este método debe ser implementado en las subclases.")
 
     
     
