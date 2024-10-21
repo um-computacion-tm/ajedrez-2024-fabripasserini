@@ -26,7 +26,7 @@ class TestExcepcionesAjedrez(unittest.TestCase):
     def test_fuera_del_tablero(self):
         with self.assertRaises(fuera_del_tablero) as context:
             raise fuera_del_tablero()
-        self.assertEqual(str(context.exception), "La posicion indicada se encuentra fuera del tablero")
+        self.assertEqual(str(context.exception), "La posición indicada se encuentra fuera del tablero")
 
         # Test con mensaje personalizado
         with self.assertRaises(fuera_del_tablero) as context:
