@@ -88,5 +88,41 @@ class TestTablero(unittest.TestCase):
             for columna in range(8):
                 self.assertIsNone(tablero.obtener_pieza(fila, columna))
 
+
+    def test_ganan_negras_sin_piezas_blancas(self):
+        # Vaciar el tablero por completo antes de empezar
+        self.tablero.vaciar_tablero()
+        
+        # Colocar solo piezas negras en el tablero
+        peon_negro = Peon("NEGRO", self.tablero)
+        self.tablero.poner_pieza(0, 0, peon_negro)
+        
+        # Verificar que el juego termina y las piezas negras ganan
+        resultado = self.tablero.verificar_estado_juego()
+        self.assertEqual(resultado, "NEGRO")
+
+    def test_ganan_blancas_sin_piezas_negras(self):
+        # Vaciar el tablero por completo antes de empezar
+        self.tablero.vaciar_tablero()
+        
+        # Colocar solo piezas blancas en el tablero
+        peon_blanco = Peon("BLANCO", self.tablero)
+        self.tablero.poner_pieza(7, 7, peon_blanco)
+        
+        # Verificar que el juego termina y las piezas blancas ganan
+        resultado = self.tablero.verificar_estado_juego()
+        self.assertEqual(resultado, "BLANCO")
+
+    def test_juego_continua_con_piezas_de_ambos_colores(self):
+        # Colocar una pieza blanca y una pieza negra
+        peon_blanco = Peon("BLANCO", self.tablero)
+        peon_negro = Peon("NEGRO", self.tablero)
+        self.tablero.poner_pieza(7, 7, peon_blanco)
+        self.tablero.poner_pieza(0, 0, peon_negro)
+        
+        # Verificar que el juego continúa
+        resultado = self.tablero.verificar_estado_juego()
+        self.assertEqual(resultado, "CONTINUA")
+
 if __name__ == '__main__':
     unittest.main()
