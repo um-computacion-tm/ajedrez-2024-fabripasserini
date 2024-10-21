@@ -41,10 +41,52 @@ class TestTablero(unittest.TestCase):
         except Exception as e:
             self.fail(f"imprimir_tablero lanzó una excepción: {e}")
 
-if __name__ == '__main__':
-    unittest.main()
+    def test_obtener_rey_blanco(self):
+        tablero = Tablero()
+        rey_blanco = tablero.obtener_rey_blanco()
+        self.assertIsInstance(rey_blanco, Rey)
+        self.assertEqual(rey_blanco.obtener_color(), "BLANCO")
+    
+    def test_obtener_rey_blanco_no_hay(self):
+        tablero = Tablero(for_test=True)  # Sin piezas
+        rey_blanco = tablero.obtener_rey_blanco()
+        self.assertIsNone(rey_blanco)
+
+    def test_obtener_rey_negro(self):
+        tablero = Tablero()
+        rey_negro = tablero.obtener_rey_negro()
+        self.assertIsInstance(rey_negro, Rey)
+        self.assertEqual(rey_negro.obtener_color(), "NEGRO")
+    
+    def test_obtener_rey_negro_no_hay(self):
+        tablero = Tablero(for_test=True)  # Sin piezas
+        rey_negro = tablero.obtener_rey_negro()
+        self.assertIsNone(rey_negro)
+
+    def test_cambiar_posiciones(self):
+        tablero = Tablero(for_test=True)
+        peon = Peon("BLANCO", tablero)
+        tablero.poner_pieza(1, 1, peon)  # Poner un peón en (1, 1)
+        tablero.cambiar_posiciones(1, 1, 3, 3)  # Mover el peón de (1, 1) a (3, 3)
+        self.assertIsNone(tablero.obtener_pieza(1, 1))  # Debe estar vacío
+        self.assertEqual(tablero.obtener_pieza(3, 3), peon) 
+
+    def test_vaciar_tablero(self):
+        # Crear un tablero con algunas piezas
+        tablero = Tablero(for_test=True)
+        peon = Peon("BLANCO", tablero)
+        tablero.poner_pieza(1, 1, peon)  # Poner un peón en (1, 1)
+
+        # Asegurarse de que el peón está en el tablero
+        self.assertIsNotNone(tablero.obtener_pieza(1, 1))
+
+        # Vaciar el tablero
+        tablero.vaciar_tablero()
+
+        # Verificar que todas las posiciones del tablero están vacías
+        for fila in range(8):
+            for columna in range(8):
+                self.assertIsNone(tablero.obtener_pieza(fila, columna))
 
 if __name__ == '__main__':
     unittest.main()
-
-
